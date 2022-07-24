@@ -1,8 +1,8 @@
 
-if [ ! -d "/secrets" ]
+if [ ! mountpoint -q -- /secrets ]
 then
-  mkdir /secrets 
-  mount -t tmpfs tmpfs /secrets -o size=5m
+  mkdir -p /secrets 
+  mount -t tmpfs tmpfs /secrets -o size=5m || exit 1
 fi
 
 node $(dirname -- $0)/index $1 $2

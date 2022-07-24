@@ -5,4 +5,4 @@ then
   mount -t tmpfs tmpfs /secrets -o size=5m
 fi
 
-node index $1 $2
+node $(dirname -- $0)/index $1 $2

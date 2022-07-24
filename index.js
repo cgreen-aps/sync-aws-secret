@@ -28,7 +28,9 @@ const syncSecret = async () => {
   });
 
   const result = await client.send(command);
-  unlinkSync(fileName);
+  try {
+    unlinkSync(fileName);
+  } catch {}
   writeFileSync(fileName, result.SecretString, { encoding: "utf8" });
 };
 

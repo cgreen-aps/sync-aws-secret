@@ -36,12 +36,15 @@ syncSecret()
   .then(() => {
     const checksumAfter = generateFileChecksum(fileName);
     if (checksumBefore === checksumAfter) {
+      console.log(`Synced file ${fileName} with no checksum change`);
       exit(0);
     } else {
+      console.log(`Synced file ${fileName} with checksum change`);
       exit(NEW_FILE_CONTENT_EXIT_CODE);
     }
   })
   .catch((e) => {
+    console.error(`Syncing caused an error: ${fileName}`, e);
     try {
       unlinkSync(fileName);
     } catch {}
